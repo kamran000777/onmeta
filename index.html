@@ -1,22 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <!-- Add script in head -->
-    <script src="https://stg.platform.onmeta.in/onmeta-sdk.js"></script>
+    <script async src="https://cdn.transak.com/js/sdk/transak-v1.js"></script>
   </head>
   <body>
-    <div id="widget"></div>
     <script>
-      let createWidget = new onMetaWidget({
-        elementId: "widget",
-        apiKey: "0a75c4d2-d530-4500-9e23-bbb6523c2ec2",
-      });
-      createWidget.init();
-			createWidget.on("ALL_EVENTS", (status) => console.log(status))
+      function launchTransak() {
+        let transak = new TransakSDK.default({
+          apiKey: "3c195b53-2f71-4a53-90ad-5f63113d277e", // Your API Key
+          environment: "STAGING", // STAGING/PRODUCTION
+          defaultCryptoCurrency: "USDC",
+          walletAddress: walletAddress, // Your customer wallet address
+          network: "polygon",
+          partnerOrderId : merchantOrderId,
+          email:userEmail,
+          fiatAmount:30,
+          fiatCurrency:"USD"
+        });
+        transak.init();
+        
+        // This will trigger when the user marks payment is made.
+        transak.on(transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
+        console.log(orderData.status);
+        });
+      }
+
+      function queryParams() {
+        const params = new URLSearchParams(window.location.search);
+        walletAddress = params.get("walletAddress");
+        userEmail = params.get("userEmail");
+        merchantOrderId = params.get("partnerOrderID");
+      }
+
+      window.onload = function () {
+        let walletAddress = "";
+        let userEmail = "";
+        let merchantOrderId = "";
+        queryParams();
+        launchTransak();
+      };
     </script>
   </body>
 </html>
