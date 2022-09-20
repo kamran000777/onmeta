@@ -23,17 +23,12 @@
         transak.init();
         
         
-        transak
-        .on(transak.ALL_EVENTS, (data) => {
-          console.log(JSON.stringify(data))
-        });
-        
-        
-        // This will trigger when the user marks payment is made.
+       // This will trigger when the user marks payment is made.
         transak.on(transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
-        console.log(JSON.stringify(orderData.status));
+        if(orderData.status.status=="COMPLETED"){
+          console.log(JSON.stringify(orderData.status));
+        }
         });
-      }
 
       function queryParams() {
         const params = new URLSearchParams(window.location.search);
