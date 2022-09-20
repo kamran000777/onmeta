@@ -29,6 +29,12 @@
           console.log(JSON.stringify({...orderData.status,merchantOrderId}));
         }
         });
+        
+        
+         // This will trigger when the user payment is failed.
+        transak.on(transak.EVENTS.TRANSAK_ORDER_FAILED, (orderData) => {
+          console.log(JSON.stringify({...orderData.status,merchantOrderId}));
+        });
       }
 
       function queryParams() {
