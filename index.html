@@ -26,7 +26,7 @@
        // This will trigger when the user marks payment is made.
         transak.on(transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
         if(orderData.status.status=="COMPLETED"){
-          console.log(JSON.stringify({...orderData.status,merchantOrderId));
+          console.log(JSON.stringify({...orderData.status,merchantOrderId}));
         }
         });
       }
