@@ -1,46 +1,47 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script async src="https://cdn.transak.com/js/sdk/transak-v1.js"></script>
-  </head>
-  <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnRamp</title>
+    <script type="module">
+        import { OnrampWebSDK } from 'https://cdn.skypack.dev/@onramp.money/onramp-web-sdk';
+        window.OnrampWebSDK = OnrampWebSDK;
+</script>
+</head>
+<body>
+    <div id="widget"></div>
     <script>
-      function launchTransak() {
-        let transak = new TransakSDK.default({
-          apiKey: "3c195b53-2f71-4a53-90ad-5f63113d277e", // Your API Key
-          environment: "STAGING", // STAGING/PRODUCTION
-          defaultCryptoCurrency: "USDC",
-          walletAddress: walletAddress, // Your customer wallet address
-          network: "polygon",
-          partnerOrderId : merchantOrderId,
-          email:userEmail,
-          fiatAmount:30,
-          fiatCurrency:"USD"
-        });
-        transak.init();
-        
-        
-       // This will trigger when the user marks payment is made.
-        transak.on(transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
-        if(orderData.status.status=="COMPLETED"){
-          console.log(JSON.stringify({...orderData.status,merchantOrderId}));
-        }
-        });
-        
-        
-         // This will trigger when the user payment is failed.
-        transak.on(transak.EVENTS.TRANSAK_ORDER_FAILED, (orderData) => {
-          console.log(JSON.stringify({...orderData.status,merchantOrderId}));
-        });
-      }
+        function widgetInitialized(){
+        console.log(userEmail);
+        console.log(walletAddress);
+        console.log(merchantOrderId);
+       let bitBnsWidget = new OnrampWebSDK({
+        appId: 1, // replace this with the appID you got during onboarding process
+        walletAddress: '0x495f519017eF0368e82Af52b4B64461542a5430B',
+        coinCode:"usdc",
+        merchantRecognitionId:merchantOrderId
+       });
+       bitBnsWidget.show();
 
-      function queryParams() {
+       bitBnsWidget.on('TX_EVENTS', (e) => {
+            // type : [WIDGET_TX_INIT, WIDGET_TX_SENDING_FAILED, WIDGET_TX_PURCHASING_FAILED, WIDGET_TX_FINDING_FAILED, WIDGET_TX_FINDING, WIDGET_TX_PURCHASING, WIDGET_TX_SENDING, WIDGET_TX_COMPLETED]
+            // data - object with tx data
+            console.log('onrampInstance TX_EVENTS', e);
+        });
+
+        bitBnsWidget.on('WIDGET_EVENTS', (e) => {
+            // type : [ONRAMP_WIDGET_CLOSE_REQUEST_CONFIRMED, ONRAMP_WIDGET_READY, ONRAMP_WIDGET_FAILED]
+            // data - object with event data
+            console.log('onrampInstance WIDGET_EVENTS', e);
+        });
+    }
+
+    function queryParams() {
         const params = new URLSearchParams(window.location.search);
         walletAddress = params.get("walletAddress");
-        userEmail = params.get("userEmail");
+        userEmail = params.get("email");
         merchantOrderId = params.get("partnerOrderID");
       }
 
@@ -49,8 +50,8 @@
         let userEmail = "";
         let merchantOrderId = "";
         queryParams();
-        launchTransak();
+        widgetInitialized();
       };
     </script>
-  </body>
+</body>
 </html>
