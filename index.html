@@ -16,7 +16,7 @@
         function widgetInitialized(){
        let bitBnsWidget = new OnrampWebSDK({
         appId: 1, // replace this with the appID you got during onboarding process
-        walletAddress: walletAddress,
+        walletAddress: '0x6c9a910539CCEdd8d37C882E2e5CfF16c47f3314',
         coinCode:"usdc",
         merchantRecognitionId:merchantOrderId
        });
@@ -25,13 +25,7 @@
        bitBnsWidget.on('TX_EVENTS', (e) => {
             // type : [WIDGET_TX_INIT, WIDGET_TX_SENDING_FAILED, WIDGET_TX_PURCHASING_FAILED, WIDGET_TX_FINDING_FAILED, WIDGET_TX_FINDING, WIDGET_TX_PURCHASING, WIDGET_TX_SENDING, WIDGET_TX_COMPLETED]
             // data - object with tx data
-            console.log('onrampInstance TX_EVENTS', e);
-        });
-
-        bitBnsWidget.on('WIDGET_EVENTS', (e) => {
-            // type : [ONRAMP_WIDGET_CLOSE_REQUEST_CONFIRMED, ONRAMP_WIDGET_READY, ONRAMP_WIDGET_FAILED]
-            // data - object with event data
-            console.log('onrampInstance WIDGET_EVENTS', e);
+            console.log(e);
         });
     }
 
