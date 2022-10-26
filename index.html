@@ -32,8 +32,8 @@
     function queryParams() {
         const params = new URLSearchParams(window.location.search);
         walletAddress = params.get("walletAddress");
-        userEmail = params.get("email");
-        merchantOrderId = params.get("partnerOrderID");
+        userEmail = params.get("userEmail");
+        merchantOrderId = params.get("merchantOrderId");
       }
 
       window.onload = function () {
