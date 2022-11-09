@@ -28,7 +28,8 @@
         });
             
        bitBnsWidget.on('ONRAMP_WIDGET_CONTENT_COPIED', (e) => {
-            console.log(JSON.stringify(e));
+            console.log(e);
+//             console.log(JSON.stringify(e));
         });
             
        bitBnsWidget.show();
@@ -41,17 +42,12 @@
         userEmail = params.get("userEmail");
         merchantOrderId = params.get("merchantOrderId");
       }
-        
-        function setLoading(){
-        setTimeout(()=>console.log("True"),2000);
-        }
 
       window.onload = function () {
         let walletAddress = "";
         let userEmail = "";
         let merchantOrderId = "";
         queryParams();
-          setLoading();
           widgetInitialized();
       };
     </script>
