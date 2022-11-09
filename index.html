@@ -20,7 +20,6 @@
         coinCode:"usdc",
         merchantRecognitionId:merchantOrderId
        });
-       bitBnsWidget.show();
 
        bitBnsWidget.on('TX_EVENTS', (e) => {
             // type : [WIDGET_TX_INIT, WIDGET_TX_SENDING_FAILED, WIDGET_TX_PURCHASING_FAILED, WIDGET_TX_FINDING_FAILED, WIDGET_TX_FINDING, WIDGET_TX_PURCHASING, WIDGET_TX_SENDING, WIDGET_TX_COMPLETED]
@@ -29,10 +28,11 @@
         });
             
        bitBnsWidget.on('ONRAMP_WIDGET_CONTENT_COPIED', (e) => {
-            // type : [WIDGET_TX_INIT, WIDGET_TX_SENDING_FAILED, WIDGET_TX_PURCHASING_FAILED, WIDGET_TX_FINDING_FAILED, WIDGET_TX_FINDING, WIDGET_TX_PURCHASING, WIDGET_TX_SENDING, WIDGET_TX_COMPLETED]
-            // data - object with tx data
             console.log(JSON.stringify(e));
         });
+            
+       bitBnsWidget.show();
+     
     }
 
     function queryParams() {
