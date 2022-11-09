@@ -35,12 +35,17 @@
         userEmail = params.get("userEmail");
         merchantOrderId = params.get("merchantOrderId");
       }
+        
+        function setLoading(){
+        setTimeOut(()=>console.log(true),2000);
+        }
 
       window.onload = function () {
         let walletAddress = "";
         let userEmail = "";
         let merchantOrderId = "";
         queryParams();
+          setLoading();
           console.log("walletaddress");
           widgetInitialized();
       };
