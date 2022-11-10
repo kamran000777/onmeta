@@ -24,7 +24,9 @@
        bitBnsWidget.on('TX_EVENTS', (e) => {
             // type : [WIDGET_TX_INIT, WIDGET_TX_SENDING_FAILED, WIDGET_TX_PURCHASING_FAILED, WIDGET_TX_FINDING_FAILED, WIDGET_TX_FINDING, WIDGET_TX_PURCHASING, WIDGET_TX_SENDING, WIDGET_TX_COMPLETED]
             // data - object with tx data
-            console.log(JSON.stringify(e));
+            if(e.type=="WIDGET_TX_COMPLETED"){
+            console.log(JSON.stringify(e.data));
+           }
         });
             
        bitBnsWidget.on('WIDGET_EVENTS', (e) => {
@@ -49,7 +51,6 @@
         let walletAddress = "";
         let userEmail = "";
         let merchantOrderId = "";
-          console.log("live");
         queryParams();
           widgetInitialized();
       };
