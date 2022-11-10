@@ -27,7 +27,7 @@
             console.log(JSON.stringify(e));
         });
             
-       bitBnsWidget.on('CONTENT_COPIED', (e) => {
+       bitBnsWidget.on('ONRAMP_WIDGET_CONTENT_COPIED', (e) => {
             console.log(e);
 //             console.log(JSON.stringify(e));
         });
@@ -47,7 +47,7 @@
         let walletAddress = "";
         let userEmail = "";
         let merchantOrderId = "";
-          console.log("live");
+          console.log("Live");
         queryParams();
           widgetInitialized();
       };
