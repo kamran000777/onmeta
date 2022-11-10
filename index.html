@@ -28,7 +28,9 @@
         });
             
        bitBnsWidget.on('WIDGET_EVENTS', (e) => {
-            console.log(e);
+           if(e.type=="ONRAMP_WIDGET_CONTENT_COPIED"){
+            console.log(e.data.content);
+           }
 //             console.log(JSON.stringify(e));
         });
             
