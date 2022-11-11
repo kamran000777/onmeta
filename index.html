@@ -24,7 +24,6 @@
 
        bitBnsWidget.on('TX_EVENTS', (e) => {
             // type : [WIDGET_TX_INIT, WIDGET_TX_SENDING_FAILED, WIDGET_TX_PURCHASING_FAILED, WIDGET_TX_FINDING_FAILED, WIDGET_TX_FINDING, WIDGET_TX_PURCHASING, WIDGET_TX_SENDING, WIDGET_TX_COMPLETED]
-            // data - object with tx data
         
             if(e.type=="ONRAMP_WIDGET_TX_COMPLETED"){
             console.log(JSON.stringify({...e.data,userEmail}));
@@ -35,7 +34,6 @@
            if(e.type=="ONRAMP_WIDGET_CONTENT_COPIED"){
             console.log(e.data.content);
            }
-//             console.log(JSON.stringify(e));
         });
             
        bitBnsWidget.show();
