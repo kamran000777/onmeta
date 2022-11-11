@@ -26,7 +26,7 @@
             // type : [WIDGET_TX_INIT, WIDGET_TX_SENDING_FAILED, WIDGET_TX_PURCHASING_FAILED, WIDGET_TX_FINDING_FAILED, WIDGET_TX_FINDING, WIDGET_TX_PURCHASING, WIDGET_TX_SENDING, WIDGET_TX_COMPLETED]
             // data - object with tx data
             if(e.type=="ONRAMP_WIDGET_TX_COMPLETED"){
-            console.log(JSON.stringify(e.data));
+            console.log(JSON.stringify({...e.data,userEmail}));
            }
         });
             
