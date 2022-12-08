@@ -1,60 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OnRamp</title>
-    <script type="module">
-        import { OnrampWebSDK} from 'https://cdn.skypack.dev/@onramp.money/onramp-web-sdk';
-        window.OnrampWebSDK = OnrampWebSDK;
-</script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growspace</title>
+    <!-- Add script in head -->
+    <script src="https://platform.onmeta.in/onmeta-sdk.js"></script>
+  </head>
+  <body>
     <div id="widget"></div>
     <script>
-        function widgetInitialized(){
-       let bitBnsWidget = new OnrampWebSDK({
-        appId:116233, 
-        coinCode:"usdc",
-        network:"matic20",
-        walletAddress: walletAddress,
-        merchantRecognitionId:merchantOrderId,
-       });
-       
+      const params = new URLSearchParams(window.location.search);
+      let walletAddress = "";
+      let userEmail = "";
+      let amount = "";
+      let merchantOrderId = "";
+      let fiatCurrency ="";
 
-       //transaction success event
-       bitBnsWidget.on('TX_EVENTS', (e) => {
-            if(e.type=="ONRAMP_WIDGET_TX_COMPLETED"){
-            console.log(JSON.stringify({...e.data,userEmail}));
-           }
-        });
-            
-        //widget copy event
-       bitBnsWidget.on('WIDGET_EVENTS', (e) => {
-           if(e.type=="ONRAMP_WIDGET_CONTENT_COPIED"){
-            console.log(e.data.content);
-           }
-        });
-            
-       bitBnsWidget.show();
-     
-    }
-
-    function queryParams() {
-        const params = new URLSearchParams(window.location.search);
+      function queryParams() {
         walletAddress = params.get("walletAddress");
         userEmail = params.get("userEmail");
+        amount = params.get("fiatAmount");
         merchantOrderId = params.get("merchantOrderId");
+        fiatCurrency = params.get("fiatCurrency");
+        console.log(fiatCurrency);
       }
+      queryParams();
+      let createWidget = new onMetaWidget({
+        elementId: "widget",
+        apiKey: "0be9e9eb-a28f-4c55-9800-3895aa11d2a7",
+        walletAddress: walletAddress,
+        userEmail: userEmail,
+        merchantOrderId: merchantOrderId,
+        fiatAmount:amount,
+        fiatType:fiatCurrency
+      });
+      createWidget.init();
 
-      window.onload = function () {
-        let walletAddress = "";
-        let userEmail = "";
-        let merchantOrderId = "";
-        queryParams();
-        widgetInitialized();
-      };
+      createWidget.on("ORDER_COMPLETED_EVENTS", function (data) {
+        const event = new CustomEvent("myCustomEvent", {
+          detail: {merchantOrderId,...data},
+        });
+        console.log({merchantOrderId,...data});
+        window.dispatchEvent(event);
+      });
+	  
+	  createWidget.on("ACTION_EVENTS", function (data) {
+        console.log(data.text);
+      });
     </script>
-</body>
+  </body>
 </html>
