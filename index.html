@@ -42,7 +42,6 @@
         const event = new CustomEvent("myCustomEvent", {
           detail: {merchantOrderId,...data},
         });
-        console.log({merchantOrderId,...data});
         window.dispatchEvent(event);
       });
 	  
