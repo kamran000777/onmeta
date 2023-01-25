@@ -1,54 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Growspace</title>
-    <!-- Add script in head -->
-    <script src="https://platform.onmeta.in/onmeta-sdk.js"></script>
-  </head>
-  <body>
-    <div id="widget"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
     <script>
-      const params = new URLSearchParams(window.location.search);
-      let walletAddress = "";
-      let userEmail = "";
-      let amount = "";
-      let merchantOrderId = "";
-      let fiatCurrency ="";
+        //Write a JS program that finds the longest common substring between two strings.
 
-      function queryParams() {
-        walletAddress = params.get("walletAddress");
-        userEmail = params.get("userEmail");
-        amount = params.get("fiatAmount");
-        merchantOrderId = params.get("merchantOrderId");
-        fiatCurrency = params.get("fiatCurrency");
-      }
-      queryParams();
-      let createWidget = new onMetaWidget({
-        elementId: "widget",
-        apiKey: "0be9e9eb-a28f-4c55-9800-3895aa11d2a7",
-        walletAddress: walletAddress,
-        userEmail: userEmail,
-        merchantOrderId: merchantOrderId,
-        fiatAmount:amount,
-        fiatType:fiatCurrency,
-	       offRamp: "enabled",
-        onRamp: "disabled"
-      });
-      createWidget.init();
+        console.log(findLongCsubS("longest","common"));
 
-      createWidget.on("ORDER_COMPLETED_EVENTS", function (data) {
-        const event = new CustomEvent("myCustomEvent", {
-          detail: {merchantOrderId,...data},
-        });
-        window.dispatchEvent(event);
-      });
-	  
-	  createWidget.on("ACTION_EVENTS", function (data) {
-        console.log(data.text);
-      });
+        function findLongCsubS(str1, str2){
+            let shortStringLength =0;
+            let ans = '';
+            let result = '';
+            if(str1.length<str2.length){
+               shortStringLength = str1.length;
+            }else{
+                shortStringLength =str2.length;
+            }
+
+            for(let i=0; i<shortStringLength; i++){
+               for(let j=0; j<shortStringLength; j++){
+               if(str1[i]==str2[j]){
+                ans += str1[i];
+               result = ans.length>result.length?ans:result;
+               }else{
+                ans = '';
+               }
+            }
+            }
+            return result;
+        }
     </script>
-  </body>
+</body>
 </html>
