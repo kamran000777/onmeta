@@ -1,42 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+<style>
+  
+  td,th{
+    text-align: start;
+    width: 200px;
+    padding-left: 10px;
+  }
+
+  
+  thead,tbody,table,tr,td,th{
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+</style>
 <body>
-    <script>
-        //Write a JS program that finds the longest common substring between two strings.
+    
+  <table>
+    <thead>
+       
+    </thead>
+    <tbody>
+       
+    </tbody>
+  </table>
+  <script>
 
-        console.log(findLongCsubS("longest","common"));
+    //3. Write a command to find if a given number is even/odd without a conditional statement?
+    function isNumberEven(num){
+      return num%2==0;
+    }
 
-        function findLongCsubS(str1, str2){
-            let shortStringLength =0;
-            let longString = 0;
-            let ans = '';
-            let result = '';
-            if(str1.length<str2.length){
-               shortStringLength = str1.length;
-               longString = str2.length;
-            }else{
-                shortStringLength =str2.length;
-               longString = str1.length;
-            }
+    //5. Write a program in javascript for the following:-
+// a. declare array
+//b. add item
+// c. delete an item
+// d. add a particular index
+// e. delete from a particular index
 
-            for(let i=0; i<shortStringLength; i++){
-               for(let j=0; j<longString; j++){
-               if(str1[i]==str2[j]){
-                ans += str1[i];
-               result = ans.length>result.length?ans:result;
-               }else{
-                ans = '';
-               }
-            }
-            }
-            return result;
+let arr = [1,2,3,4,5];
+
+function addItemtoArray(num){
+  arr.push(num);
+}
+
+function deleteItemFromArray(num){
+  arr = arr.filter((item)=>item!=num);
+}
+
+function addElementToParticularIndex(num,index){
+  arr.splice(index-1,0,num);
+}
+
+function deleteElementFromParticularIndex(index){
+  arr.slice(index);
+}
+
+// 7. Write a program to print all prime numbers between 1 and 100
+// 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+
+function isPrime(n) {
+        // Corner case
+        if (n <= 1)
+            return false;
+  
+        // Check from 2 to n-1
+        for (let i = 2; i < n; i++){
+          if (n % i == 0)
+                return false;
+  
         }
-    </script>
+          
+        return true;
+}
+
+function printPrime(limit){
+    if(limit<2){
+      console.log("Please add a greater number");
+      return;
+    }  
+
+    let result = [];
+
+    for(let i=2;i<=limit; i++){
+      if(isPrime(i)){
+        result.push(i);
+      }
+    }
+  
+    return result;
+}
+
+
+// Write a program to find the number of times, the character "a" is repeated and its index
+// position in the following paragraph:-
+
+function getCountOfChar(str,char){
+  let result = {
+    count:0,
+    index:[]
+  }
+  
+  for(let i=0; i<str.length; i++){
+    if(str[i]===char){
+
+      result.count++;
+      result.index.push(i);
+    }
+  }
+  
+  return result;
+}
+const str = "JavaScript was created by Brendan Eich in 1995 to give web pages a little more pep than the <blink> tag could provide. Today it has far more powerful uses and companies like Google and Facebook use JavaScript to build complex desktop-like web applications. With the launch of Node.js, It has also become one of the most popular languages for building server-side software. Today, even the web isn’t big enough to contain JavaScript’s versatility. I believe that you are already aware of these facts and this has made you land on this JavaScript Interview Questions article.";
+getCountOfChar(str,"a");
+
+
+//0,1,1,2,3,5,8,13,21,..................
+function printPattern(num){
+  let n1= 0;
+  let n2=1;
+  let result = [];
+  let index=2;
+   
+  result.push(n1);
+  result.push(n2);
+  while(index<num){
+    let sum = n1+n2;
+    result.push(sum);
+    n1=n2;
+    n2=sum;
+    index++;
+  }
+  
+  return result;
+}
+
+//Write a program to get a sum of even and odd numbers between 1-100.
+
+function getSum(limit){
+  let result = {
+    oddSum:0,
+    evenSum:0
+  }
+
+  for(let i=1; i<=limit; i++){
+    if(isNumberEven(i)){
+      result.evenSum+=i;
+    }else{
+      result.oddSum+=i;
+    }
+  }
+  
+  return result;
+}
+
+
+
+//
+// Print user details in a list format using javascript/jquery using table tag 
+let employees=
+[
+{
+"first_name": "Amit",
+"last_name": "Sharma",
+"department": "SEO"
+},
+{
+"first_name": "Vineet",
+"last_name": "Kumar",
+"department": "Accounts"
+},
+{
+"first_name": "Ajay",
+"last_name": "Thakur",
+"department": "QA"},
+{
+"first_name": "Chandra",
+"last_name": "Sharma",
+"department": "Designer"
+}
+]
+
+
+function printEmployeeDetails(){
+  createTableHeading(employees[0]);
+   employees.forEach((employee)=>{
+    createBody(employee);
+   })
+}
+
+function createTableHeading(obj){
+  const thead = document.getElementsByTagName('thead')[0];
+  
+  const tr = document.createElement('tr');
+  for(let i in obj){
+    const th = document.createElement('th');
+   th.innerText = i;
+
+   tr.append(th);
+  }
+  
+  thead.append(tr);
+}
+
+function createBody(obj){
+  const tbody = document.getElementsByTagName('tbody')[0];
+
+  const tr = document.createElement('tr');
+  for(let i in obj){
+    const td = document.createElement('td');
+   td.innerText = obj[i];
+
+   tr.append(td);
+  }
+  tbody.append(tr);
+}
+
+
+
+//Print the following series:-
+// 1, 2, 6, 8, 11, 14, 16, 20, 21,............
+
+function printDoublePattern(limit){
+  if(limit<2){
+      console.log("Please add a greater number");
+      return;
+    }  
+
+    let num=1;
+    let num2=2;
+
+    let result = [num,num2];
+
+    for(let i=1;i<limit; i++){
+      if(!isNumberEven(i)){
+        result.push(num+=5);
+      }else{
+        result.push(num2+=6);
+      }
+    }
+  
+    return result;
+}
+
+  </script>
 </body>
 </html>
