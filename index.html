@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Coin Ashoka</title>
-        <!-- staging -->
-        <script src="https://stg.platform.onmeta.in/onmeta-sdk.js"></script>
-        <!-- production -->
-        <!-- <script src="https://platform.onmeta.in/onmeta-sdk.js"></script> -->
-      </head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Aska</title>
+  <!-- staging -->
+  <!-- <script src="https://stg.platform.onmeta.in/onmeta-sdk.js"></script> -->
+  <!-- production -->
+  <script src="https://platform.onmeta.in/onmeta-sdk.js"></script>
+</head>
+
 <body>
-    <div id="widget"></div>
-    
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        let walletAddress = "0x12ccD96203016540ca71A15e106E733e0eDB1bA6";
-        let userEmail = "";
-        let merchantOrderId = "";
-  
-        function queryParams() {
-          userEmail = params.get("email");
-          merchantOrderId = params.get("merchantOrderId");
-        }
-        queryParams();
-        let createWidget = new onMetaWidget({
-          elementId: "widget",
-        //   apiKey: "0be9e9eb-a28f-4c55-9800-3895aa11d2a7",   //Production
-          apiKey:"ab3a0e79-2233-4eb1-be33-b4e991a8e305",   //Staging
-          walletAddress: walletAddress,
-          userEmail: userEmail,
-          merchantOrderId: merchantOrderId,
-        });
-        createWidget.init();
-        
-        createWidget.on("ORDER_COMPLETED_EVENTS", (e)=>{
-            console.log(JSON.stringify({...e,merchantOrderId:merchantOrderId}));
-        });
+  <div id="widget"></div>
 
-        createWidget.on("ACTION_EVENTS", (e)=>{
-            console.log(e.text);
-        });
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    let walletAddress = "0xbAd5571b7aaa300bAbC2BEe287602d50cF6b38c4";
+    let userEmail = "";
+    let merchantOrderId = "";
 
-        
-      </script>
+    function queryParams() {
+      userEmail = params.get("email");
+      merchantOrderId = params.get("merchantOrderId");
+    }
+    queryParams();
+    let createWidget = new onMetaWidget({
+      elementId: "widget",
+        apiKey: "d36de2f4-67a9-46b0-9f89-1e5095a64d1d",   //Production
+      // apiKey: "ab3a0e79-2233-4eb1-be33-b4e991a8e305",   //Staging
+      walletAddress: walletAddress,
+      userEmail: userEmail,
+      merchantOrderId: merchantOrderId,
+    });
+    createWidget.init();
+
+    createWidget.on("ORDER_COMPLETED_EVENTS", (e) => {
+      console.log(JSON.stringify({ ...e, merchantOrderId: merchantOrderId }));
+    });
+
+    createWidget.on("ACTION_EVENTS", (e) => {
+      console.log(e.text);
+    });
+
+  </script>
 </body>
+
 </html>
