@@ -18,14 +18,10 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     let walletAddress = "0x12ccD96203016540ca71A15e106E733e0eDB1bA6";
-    let userEmail = "";
-    let merchantOrderId = "";
-
-    function queryParams() {
-      userEmail = params.get("email");
-      merchantOrderId = params.get("merchantOrderId");
-    }
-    queryParams();
+    let userEmail = params.get("email");;
+    let merchantOrderId = params.get("merchantOrderId");
+    
+    console.log(userEmail);
     let createWidget = new onMetaWidget({
       elementId: "widget",
 //         apiKey: "d36de2f4-67a9-46b0-9f89-1e5095a64d1d",   //Production
