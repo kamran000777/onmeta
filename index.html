@@ -9,7 +9,7 @@
   <!-- staging -->
 <!--   <script src="https://stg.platform.onmeta.in/onmeta-sdk.js"></script> -->
   <!-- production -->
-<!--   <script src="https://platform.onmeta.in/onmeta-sdk.js"></script> -->
+  <script src="https://platform.onmeta.in/onmeta-sdk.js"></script>
 </head>
 
 <body>
@@ -21,7 +21,6 @@
     let userEmail = params.get("email");;
     let merchantOrderId = params.get("merchantOrderId");
     
-    console.log(userEmail);
     let createWidget = new onMetaWidget({
       elementId: "widget",
         apiKey: "d36de2f4-67a9-46b0-9f89-1e5095a64d1d",   //Production
