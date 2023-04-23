@@ -23,6 +23,7 @@
     
     let createWidget = new onMetaWidget({
       elementId: "widget",
+      isAndroid:true,
         apiKey: "d36de2f4-67a9-46b0-9f89-1e5095a64d1d",   //Production
 //       apiKey: "ab3a0e79-2233-4eb1-be33-b4e991a8e305",   //Staging
       walletAddress: walletAddress,
@@ -30,6 +31,10 @@
       merchantOrderId: merchantOrderId,
     });
     createWidget.init();
+    
+    createWidget.on("UPI_FAST", (e) => {
+      console.log(JSON.stringify({ ...e}));
+    });
 
     createWidget.on("ORDER_COMPLETED_EVENTS", (e) => {
       console.log(JSON.stringify({ ...e, merchantOrderId: merchantOrderId }));
