@@ -31,17 +31,13 @@
       merchantOrderId: merchantOrderId,
     });
     createWidget.init();
-    
-    createWidget.on("UPI_FAST", (e) => {
-      console.log(JSON.stringify({ ...e}));
-    });
 
     createWidget.on("ORDER_COMPLETED_EVENTS", (e) => {
       console.log(JSON.stringify({ ...e, merchantOrderId: merchantOrderId }));
     });
 
     createWidget.on("ACTION_EVENTS", (e) => {
-      console.log(e.text);
+      console.log(e);
     });
 
   </script>
