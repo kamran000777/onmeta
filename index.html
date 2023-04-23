@@ -21,6 +21,7 @@
     let userEmail = params.get("email");
     let isAndroid = params.get("isAndroid");
     let merchantOrderId = params.get("merchantOrderId");
+    console.log(JSON.parse(isAndroid));
     
     let createWidget = new onMetaWidget({
       elementId: "widget",
