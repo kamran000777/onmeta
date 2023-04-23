@@ -23,6 +23,8 @@
     let merchantOrderId = params.get("merchantOrderId");
     isAndroid=JSON.parse(isAndroid)? JSON.parse(isAndroid): false;
     
+    console.log('====================', isAndroid);
+    
     let createWidget = new onMetaWidget({
       elementId: "widget",
       isAndroid:JSON.parse(isAndroid),
