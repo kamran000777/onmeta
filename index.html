@@ -38,7 +38,7 @@
 
     createWidget.on("ACTION_EVENTS", (e) => {
       if(e && e.data && (Object.keys(e.data).length>0) && e.data.type==='UPI_FAST'){
-      console.log(JSON.stringify({link:e.data.link}));
+      console.log(`link-${e.data.link}`);
       }else{
       console.log(e.text);
       }
