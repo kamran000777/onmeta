@@ -18,12 +18,13 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     let walletAddress = "0x12ccD96203016540ca71A15e106E733e0eDB1bA6";
-    let userEmail = params.get("email");;
+    let userEmail = params.get("email");
+    let isAndroid = params.get("isAndroid");
     let merchantOrderId = params.get("merchantOrderId");
     
     let createWidget = new onMetaWidget({
       elementId: "widget",
-      isAndroid:true,
+      isAndroid:JSON.parse(isAndroid),
         apiKey: "d36de2f4-67a9-46b0-9f89-1e5095a64d1d",   //Production
 //       apiKey: "ab3a0e79-2233-4eb1-be33-b4e991a8e305",   //Staging
       walletAddress: walletAddress,
