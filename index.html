@@ -32,7 +32,11 @@
     });
     createWidget.init();
 
-    createWidget.on("ORDER_COMPLETED_EVENTS", (e) => {
+     createWidget.on("ORDER_COMPLETED_EVENTS", (e) => {
+      console.log(JSON.stringify({ ...e, merchantOrderId: merchantOrderId }));
+    });
+    
+     createWidget.on("ALL_EVENTS", (data) => {
       console.log(JSON.stringify({ ...e, merchantOrderId: merchantOrderId }));
     });
 
