@@ -37,7 +37,7 @@
     });
     
      createWidget.on("ORDER_EVENTS", (data) => {
-      console.log("oreer",JSON.stringify({ ...data, merchantOrderId: merchantOrderId }));
+      console.log(JSON.stringify({ ...data, merchantOrderId: merchantOrderId }));
     });
 
     createWidget.on("ACTION_EVENTS", (e) => {
